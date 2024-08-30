@@ -8,8 +8,8 @@ def handle_password_reset_token(sender, instance, reset_password_token, *args, *
      # Encode user ID
     token = reset_password_token.key  # Generate token
 
-    # Construct the reset link
-    reset_link = f"https://erblan.com/reset-password?token={token}"
+    # Construct the reset link/reset
+    reset_link = f"http://localhost/password/reset/?token={token}"
     user = reset_password_token.user
     # Send the reset link to the user's email
     subject = "Password Reset Link"
