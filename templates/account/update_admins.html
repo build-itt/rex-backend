@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .header img {
+        width: 200px;
+      }
+      .content {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .content h1 {
+        margin-top: 0;
+        font-size: 24px;
+      }
+      .content p {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <h1>Charge Confirmed</h1>
+        <p>Heat,</p>
+        <p>We have a charge of ${{amount}} in our account. This is to notify all admins of this charge.</p>
+        
+      </div>
+    </div>
+  </body>
+</html>

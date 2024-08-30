@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "uber-clone-first",
+  "private_key_id": "c7bdb50d2274125a148eb44266724272418cdb6d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDLFol8AUkK2hNR\nCFwZELaLjeLNPYN3D0uYxNlTJ4HsZcj4P+0aWnTSyoCVfvTbvDqVzAi4ldycXkkA\niS0RvTw1siD3DA6WZOjKaSwJpQwHWZz+mobp2zmGs/UcjLQSALHrswhGJm47uuYH\nGYyvMARW91Ywpao9qsSGWoMsIOLEeIDP4avlydaGW1yBznR6JRi55n4KUSxwiu6H\nx0Rcu2ftMwFayZ5xo1hLZadz50ng0VD6IA2b/37aXVF9gCEwrJBKbHkkOAnPANnt\n12xEOUdu4/5u9GYhfhwpzSZ11XkhGnofM7t+j4M5sypCM5wwiAzTbgAGACQ7Vfbx\n0crDwrrzAgMBAAECggEAEfq6zTmn58gKsb/Vt3pdTtmO3LC3dNDr1miG/O+gdvdD\n5YZzTUP417iJzbJhpxpw7VYU55KM52MJf3yles6QCAjvFjABEpt4aIMLHQd5myT5\n2yh/DTEVVLGV36MtRfK9zaoZ72vzkmInfzVp2RCdMb3P6ZqhCbiWkXZt6ng220HP\nWbFLR9DhPGo1XStLCNw1VmQ9H269TVLindXRjqfB/vK3UvFWf6DcAO/AaTB5579n\nd0mezg4Iw1pR2PET5wAFEQJW58cw0If6IVWWYOdcEOZLWV3n+ZZdEwlMLTMKMlQe\nvyGQZVz4X/psk0iUih1tFX9Bp01twVRYPtUpYrTD4QKBgQD1kX9aKJgIhBAuRj6l\nLRmlXpuBKe2cvB0iiHfHaYacFih2s+HWXm+IdoODOAfYj4mikprCla4DXoJhLjUR\nte1RMsk/FKDGqBB2CqiZSw3k3EF7RlGGaCFCAtBIzgz3MRf5hJ1ewJs3n+u2/CII\nh6TQ3+VdnOqQmSFngC/4nOriiwKBgQDTtxNL9ECr+jMZbygGLs9YxK059PTH6hLo\nHaXRpQ0OnFOYyUq6tRKl1fP+8+nlQxpbmYIGHox7gsdiLc6vdwtPoxdzJofLD/XV\nDGfue/X0KpPaRZ0UKgmE7wYT/h8w9MLUeFWcag+TIDrZ0+qUgvGQtuTjbDafP6F5\nVKAidf4eOQKBgQCXh4iGIbZuys8RPtc5JXNFz/M06KJurMVtobgHnN4rQqEFXkpk\n9TDti/Pq7JAq2aecYcqNd79A5Pie7txgaVpfWG9GNXxgGSTPMhSHQwD3z9G4N9Pm\nlCqxiPrtcfgeMHUSyvowlbkxwcS5zStTCCBzozTtZv5264bpTvhK+MkXsQKBgQC5\nrKGbx0bAjNkrwTSU15C5BSP25EGY4kxajUXTqrDc03TtVfvX6t3D2vP18Ox8SHFh\nTCugOkJyP6ulCw9tCzY8TYhPUMde60xp4Et19/koff7VOqAcAxH+J7Jo7kFkqgQE\nWtSaLNoj6ewzBYuBW6WHiR8L5Oeymhd/VRxrnJeU4QKBgQC3CF+a+KZjcIENuY2J\nSpiEJs/njAsqrpaiA+hDOCoTRPkB14LFCbdvNolhRnizigDULZnTBXb15wenaSwZ\nRHO13zrAd0WKl/yo0NB3Am1h/LKIpHqR25S4xmB7ltzIZSgFa/NV13glHNRyjral\n4NfIu/B4n7NTGJr2VS0s50dRjQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "godsonic@uber-clone-first.iam.gserviceaccount.com",
+  "client_id": "100763907161534297492",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/godsonic%40uber-clone-first.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

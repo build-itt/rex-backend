@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+  <head>
+    <style>
+    body {
+      background-color: #0a0a0a;
+      color: #33ff33; /* Classic hacker green */
+      font-family: 'Courier New', Courier, monospace; /* Monospace for terminal look */
+      font-size: 16px;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      color: #ff3333; /* Accent red for headings */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+
+    p {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      background-color: #111; /* Darker container */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      border: 1px solid #333;
+    }
+
+    a {
+      color: #33ff33;
+      text-decoration: none;
+      border-bottom: 1px solid #33ff33;
+      transition: border-bottom 0.3s ease;
+      font-weight: bold;
+    }
+
+    a:hover {
+      border-bottom: 1px solid transparent;
+      color: #ff3333;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-top: 40px;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+    }
+
+    /* Add some glitchy effects */
+    .glitch {
+      color: #33ff33;
+      position: relative;
+      animation: glitch 1s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      text-shadow: -2px 0 red, 2px 0 blue;
+      top: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      animation: glitch 1s infinite;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 blue, 2px 0 red;
+      animation-delay: 0.1s;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 red, 2px 0 blue;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes glitch {
+      0% {
+        clip: rect(24px, 9999px, 67px, 0);
+      }
+      10% {
+        clip: rect(34px, 9999px, 44px, 0);
+      }
+      20% {
+        clip: rect(6px, 9999px, 25px, 0);
+      }
+      30% {
+        clip: rect(50px, 9999px, 80px, 0);
+      }
+      40% {
+        clip: rect(8px, 9999px, 40px, 0);
+      }
+      50% {
+        clip: rect(12px, 9999px, 90px, 0);
+      }
+      60% {
+        clip: rect(30px, 9999px, 80px, 0);
+      }
+      70% {
+        clip: rect(80px, 9999px, 100px, 0);
+      }
+      80% {
+        clip: rect(18px, 9999px, 60px, 0);
+      }
+      90% {
+        clip: rect(10px, 9999px, 50px, 0);
+      }
+      100% {
+        clip: rect(60px, 9999px, 110px, 0);
+      }
+    }
+
+  </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <h1>Charge Confirmed</h1>
+        <p>Dear {{user}},</p>
+        <p>We wanted to let you know that a charge of ${{amount}} has been successfully processed on your account. This charge was to update your balance and your balance has been updated accordingly.</p>
+        <p>Refresh the page if your new balance has not reflected yet.</p>
+        <p>If you have any questions or concerns, please don't hesitate to contact us through chat support.</p>
+        <p>Thank you for your business!</p>
+        
+      </div>
+    </div>
+  </body>
+</html>
