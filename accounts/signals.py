@@ -9,11 +9,11 @@ def handle_password_reset_token(sender, instance, reset_password_token, *args, *
     token = reset_password_token.key  # Generate token
 
     # Construct the reset link/reset
-    reset_link = f"http://localhost:3000/password/reset/?token={token}"
+    reset_link = f"/password/reset/?token={token}"
     user = reset_password_token.user
     # Send the reset link to the user's email
     subject = "Password Reset Link"
-    message = f"Click the link below to reset your password:\n\n{reset_link}"
+    message = f"Copy the text below. Add that to your url in your onion browser to reset your password:\n\n{reset_link}"
     from_email = "support@darkpass.net"  # Set your sender email address
     recipient_list = [user.email]
     try:
