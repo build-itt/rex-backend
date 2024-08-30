@@ -31,7 +31,6 @@ class Command(BaseCommand):
                             'type': row['type'],
                             'Info': row['Info'],
                             'price': float(row['Price']),
-                            'slug': row['Slug'],
                             'pdf': pdf,
                             'state': row['State'],
                             'dob': row['DOB'],

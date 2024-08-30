@@ -4,7 +4,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
 class CategoryList(generics.ListCreateAPIView):
-    queryset = Category.objects.all().exclude(name="Extraction")
+    queryset = Category.objects.all().exclude(name__in=["Extraction", "Dumps"])
     serializer_class = CategorySerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
