@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "payment.middleware.RemoveServerHeaderMiddleware",
 ]
 
 ROOT_URLCONF = 'core.urls'
