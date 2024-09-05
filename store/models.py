@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from accounts.models import Customer
 # Category Model
 class Category(models.Model):
     location_choices = (
@@ -63,4 +64,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-        
+#Comment Model
+class Comment(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    body = models.TextField()
+    attachment = models.FileField(null=True, blank=True, upload_to='attachments/')
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+    created_by = models.ForeignKey(Customer, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
+    class Meta:
+        ordering = ('created',)
+    
+    def __str__(self):
+        return f'Comment by {self.name}'       

@@ -23,3 +23,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('pdf','balance','price','Status')
 
     prepopulated_fields ={'slug': ('name',)}
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'body', 'created', 'active','created_by')
+    list_filter = ('active', 'created', )
+    search_fields = ('name', 'email', 'body','created_by__username')
+
+admin.site.register(Comment, CommentAdmin)

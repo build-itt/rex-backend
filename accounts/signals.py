@@ -9,12 +9,12 @@ def handle_password_reset_token(sender, instance, reset_password_token, *args, *
     token = reset_password_token.key  # Generate token
 
     # Construct the reset link/reset
-    reset_link = f"/password/reset/?token={token}"
+    reset_link = f"http://mc7afo6vxv6bw4qcxggzyb73t4jg4qbfipm73njdcvyfrlzhubktchqd.onion/#/password/reset/?token={token}"
     user = reset_password_token.user
     # Send the reset link to the user's email
     subject = "Password Reset Link"
-    message = f"Copy the text below. Add that to your url in your onion browser to reset your password:\n\n{reset_link}"
-    from_email = "support@darkpass.net"  # Set your sender email address
+    message = f"Copy the text below. copy and paste this url in your onion browser to reset your password:\n\n{reset_link}"
+    from_email = "darkpass45@proton.me"  # Set your sender email address
     recipient_list = [user.email]
     try:
         send_mail(subject, message, from_email, recipient_list)

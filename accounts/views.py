@@ -43,7 +43,8 @@ class RegistrationView(CreateAPIView):
             'token': auth_token.key, # Serialize the token key as a string
             "username":user.username,
             "email":user.email,
-            "total_products":total_products
+            "total_products":total_products,
+            "id":user.pk
         }
 
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
@@ -101,7 +102,7 @@ class UserLoginView(CreateAPIView):
         # Log the user in within the session
         login(request, user)
         total_products = Invoice.objects.filter(sold=True, created_by=user, received__gte=0).count()
-        return Response({"message": "Login successful", "token": token.key, "username":user.username,"email":user.email,"total_products":total_products}, status=status.HTTP_200_OK)
+        return Response({"message": "Login successful", "token": token.key, "username":user.username,"email":user.email,"total_products":total_products,"id":user.pk}, status=status.HTTP_200_OK)
 
 class UserLogoutView(GenericAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]

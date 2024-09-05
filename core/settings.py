@@ -138,30 +138,39 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "static_root"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Import necessary modules
-from google.oauth2 import service_account
-# Google Cloud Storage settings
-GS_PROJECT_ID = 'uber-clone-first'
-GS_BUCKET_NAME = 'godsonic'
 # settings.py
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    'uber-clone-first-c7bdb50d2274.json'
-)
-# Media files (uploads)
-GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
-MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
+
+# Backblaze B2 S3-Compatible Storage Settings
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Your B2 account credentials
+AWS_ACCESS_KEY_ID = '0050e63d27947900000000001'
+AWS_SECRET_ACCESS_KEY = 'K005ciejE154uGe9hIxKMLoQJx2CcLs'
+AWS_STORAGE_BUCKET_NAME = 'darkpass'
+AWS_S3_ENDPOINT_URL = 'https://s3.us-east-005.backblazeb2.com'
+
+# Set the region to match the B2 bucket region
+AWS_S3_REGION_NAME = 'us-east-005'  # Example: us-west-002
+
+# Set the URL to access your media files
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.backblazeb2.com/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = 'accounts.Customer'
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp-relay.brevo.com"
-EMAIL_HOST_USER = "deagusco@gmail.com"
-EMAIL_HOST_PASSWORD = "Hsnxt9J1OThfYICB"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'darkpass45@proton.me'
+EMAIL_HOST_PASSWORD = 'acLN8l9oZNlLdCTFZrJthQ'  # Leave this empty as the password is managed by the ProtonMail Bridge
+
+
+
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -171,6 +180,6 @@ CHANNEL_LAYERS = {
     },
 }
 CORS_ALLOW_ALL_ORIGINS = True
-DEFAULT_FROM_EMAIL = "support@darkpass.net"
+DEFAULT_FROM_EMAIL = "darkpass45@proton.me"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
