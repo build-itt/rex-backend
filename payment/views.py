@@ -9,7 +9,7 @@ import requests
 import uuid
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication, TokenAuthentication
 from .models import Balance, Addr
-from .serializers import BalanceSerializer,Telegram_ClientSerializer,Telegram_OtpBotserializer
+from .serializers import BalanceSerializer,Telegram_ClientSerializer,Telegram_OtpBotserializer,BtcCashoutSerializer
 from store.serializers import ProductSerializer
 from rest_framework.generics import CreateAPIView
 from asgiref.sync import async_to_sync
@@ -199,6 +199,40 @@ class DecryptView(APIView):
         
         return Response({'message': 'Product decrypted'}, status=status.HTTP_200_OK)
 
+class BuyBtcCashout(APIView):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        amount = request.GET.get('amount')
+        deduction = 0.3 * float(amount)
+        data = {
+            'deduction': deduction,
+            'amount': amount
+        }
+        return Response(data, status=status.HTTP_200_OK)
+    def post(self, request):
+        serializer = BtcCashoutSerializer(data=request.data)
+        if serializer.is_valid():
+            amount = serializer.validated_data['amount']
+            address = serializer.validated_data['address']
+            print(address)
+            # Remove the tenth character
+            if len(address) >= 10:
+                address = address[:9] + address[10:]
+            
+            deduction = 0.3 * float(amount)
+            user_balance = Balance.objects.filter(created_by=request.user).first()
+            if user_balance.balance < deduction:
+                return Response({'message': 'Insufficient balance'}, status=status.HTTP_400_BAD_REQUEST)
+            user_balance.balance -= deduction
+            user_balance.save()
+            data = {
+                'amount': amount,
+                'address': address,  # Include the modified address
+                'deduction': deduction
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @authentication_classes([BasicAuthentication])
 class CoinbaseWebhookView(APIView):
     permission_classes = [AllowAny]
