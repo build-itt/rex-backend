@@ -9,7 +9,7 @@ import requests
 import uuid
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication, TokenAuthentication
 from .models import Balance, Addr
-from .serializers import BalanceSerializer,Telegram_ClientSerializer,Telegram_OtpBotserializer,BtcCashoutSerializer
+from .serializers import BalanceSerializer,Telegram_ClientSerializer,Telegram_OtpBotserializer
 from store.serializers import ProductSerializer
 from rest_framework.generics import CreateAPIView
 from asgiref.sync import async_to_sync
@@ -198,7 +198,7 @@ class DecryptView(APIView):
             send_decryptor_mail(request, eproduct)
         
         return Response({'message': 'Product decrypted'}, status=status.HTTP_200_OK)
-
+"""
 class BuyBtcCashout(APIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
@@ -233,6 +233,7 @@ class BuyBtcCashout(APIView):
             }
             return Response(data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    """
 @authentication_classes([BasicAuthentication])
 class CoinbaseWebhookView(APIView):
     permission_classes = [AllowAny]
