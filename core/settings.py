@@ -144,8 +144,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Your B2 account credentials
-AWS_ACCESS_KEY_ID = '0050e63d27947900000000001'
-AWS_SECRET_ACCESS_KEY = 'K005ciejE154uGe9hIxKMLoQJx2CcLs'
+AWS_ACCESS_KEY_ID = '0e63d2794790'
+AWS_SECRET_ACCESS_KEY = '005001a31e2e5e054c03c61279c9019ae953c398f6'
 AWS_STORAGE_BUCKET_NAME = 'darkpass'
 AWS_S3_ENDPOINT_URL = 'https://s3.us-east-005.backblazeb2.com'
 
