@@ -15,7 +15,7 @@ class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         attatchment = serializers.FileField(required=False)
         model = Comment
-        fields = ('body', 'created_by','attachment')
+        fields = ( 'id','body', 'created_by','attachment')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
