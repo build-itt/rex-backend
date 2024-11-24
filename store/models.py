@@ -31,6 +31,11 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
     name = models.CharField(max_length=255,help_text="Not shown but required")
+    bin = models.CharField(max_length=255,blank=True)
+    zip = models.CharField(max_length=255,blank=True)
+    exp = models.CharField(max_length=255,blank=True)
+    country = models.CharField(max_length=255,blank=True)
+    bank = models.CharField(max_length=255,blank=True)
     balance = models.CharField(max_length=255,blank=True)
     type = models.CharField(max_length=255,blank=True)
     Info = models.TextField(blank=True)
