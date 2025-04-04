@@ -11,11 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -88,17 +87,12 @@ SITE_ID = 1
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "URL":os.environ.get("DATABASE_URL"),
-        "PRISMA_URL":os.environ.get("DATABASE_PRISMA_URL"),
-        "URL_NON_POOLING":os.environ.get("DATABASE_URL_NON_POOLING"),
-        "USER":"default",
-        "HOST":os.environ.get("DATABASE_HOST"),
-        "PASSWORD":os.environ.get("DATABASE_PASSWORD"),
-        "NAME":os.environ.get("DATABASE_DATABASE"),
-    }
+    'default': dj_database_url.parse(
+        os.environ.get('DATABASE_URL')
+    )
 }
 
 # Password validation
