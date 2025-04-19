@@ -192,7 +192,7 @@ class BuyView(APIView):
         
         if product.category.name == "Extraction":
             send_mail(request, product)
-        elif product.category.name == "Clone cards":
+        elif product.category.name.lower() == "cards":
             product.Status = False
             product.save()
             cards_mail(request)

@@ -15,7 +15,7 @@ def handle_password_reset_token(sender, instance, reset_password_token, *args, *
     # Send the reset link to the user's email
     subject = "Password Reset Link"
     message = f"Copy the text below. copy and paste this url in your onion browser to reset your password:\n\n{reset_link}\n\nOr use the normal web link to reset your password. \n\n{reset_link_nweb}"
-    from_email = "darkpass45@proton.me"  # Set your sender email address
+    from_email = "support@blackclubs.shop"  # Set your sender email address
     recipient_list = [user.email]
     try:
         send_mail(subject, message, from_email, recipient_list)
