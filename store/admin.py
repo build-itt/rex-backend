@@ -8,6 +8,7 @@ from .models import *
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'location']
+    search_fields = ('name', 'location')
     prepopulated_fields = {'slug': ('name',)}
 
     list_editable = ('slug','location')

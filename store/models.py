@@ -8,6 +8,7 @@ class Category(models.Model):
         ('USA', 'USA'),
         ('UK', 'UK'),
         ('Canada', 'Canada'),
+        ('Other', 'Other'),
     )
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
