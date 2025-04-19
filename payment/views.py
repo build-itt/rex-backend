@@ -15,6 +15,7 @@ from rest_framework.generics import CreateAPIView
 from asgiref.sync import async_to_sync
 import re
 from django.http import HttpResponse
+from requests.exceptions import ReadTimeout
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from django.views.decorators.csrf import csrf_exempt
 
@@ -31,46 +32,82 @@ class BalanceListView(APIView):
 
 class CoinbasePaymentView(APIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         try:
+            # Fetch balance object for the user
             balance = Balance.objects.get(created_by=request.user)
+
+            # Check if address is None or empty
             if balance.address:
+                # If address exists, return current balance info
                 response = {
                     'addr': balance.address,
                     'balance': balance.balance,
                     'username': request.user.username,
                 }
-                return Response(response,status=status.HTTP_201_CREATED)
+                return Response(response, status=status.HTTP_201_CREATED)
+
             else:
+                # If address does not exist, generate a new address
                 api_key = 'zo7YGopu7QRIcjNaCATRvwytagXQXQJ6m6oHrD5JvgY'
                 amount = float(1.00)
-                url = 'https://www.blockonomics.co/api/new_address'
+                url = 'https://www.blockonomics.co/api/new_address?match_account=2j2AsZg9oMpAq5oSpUn'
                 headers = {'Authorization': "Bearer " + api_key}
-                r = requests.post(url, headers=headers)
+
+                # Call Blockonomics API to generate a new address
+                try:
+                    r = requests.post(url, headers=headers, timeout=5)
+                except ReadTimeout:
+                    addr = 'bc1qkysz5lk2hm29exemscz8tm64ut0dfd6tx9sgak'
+                    return Response(
+                        {
+                            'message': 'Error: Request timed out',
+                            'addr': addr,
+                            'username': request.user.username,
+                        },
+                        status=status.HTTP_201_CREATED
+                    )
                 if r.status_code == 200:
-                    address = r.json()['address']
+                    # Extract the address from response
+                    address = r.json().get('address', '')
+                    if not address:
+                        return Response({'message': 'Error: Empty address returned'}, status=status.HTTP_400_BAD_REQUEST)
+
+                    # Convert amount to bits (satoshi)
                     bits = exchanged_rate(amount)
+
+                    # Generate order_id for the new transaction
                     order_id = uuid.uuid1()
-                    # Check if the user already has a balance model
-                    balance = Balance.objects.filter(created_by=request.user).first()
+
+                    # Check if the user already has a balance entry
                     if balance:
-                        # If the user has a balance model, use its id
+                        # Update existing balance entry
                         invoice_id = balance.id
                         balance.address = address
                         balance.received = 0
                         balance.save()
+
+                        # Set balance to 0 if it's None
                         if balance.balance is None:
                             balance.balance = 0
                             balance.save()
-                        ad = Addr.objects.create(created_by=request.user, address=address, balance=balance)
-                        
+
+                        # Create a new address record
+                        Addr.objects.create(created_by=request.user, address=address, balance=balance)
+
                     else:
-                        # Otherwise, create a new balance model
+                        # Create a new balance record if none exists
                         invoice = Balance.objects.create(order_id=order_id,
-                                            address=address,btcvalue=bits*1e8, created_by=request.user, balance=0)
-                        addr = Addr.objects.create(created_by=request.user, address=address, balance=invoice)
+                                                         address=address,
+                                                         btcvalue=bits * 1e8,
+                                                         created_by=request.user,
+                                                         balance=0)
+                        Addr.objects.create(created_by=request.user, address=address, balance=invoice)
                         invoice_id = invoice.id
+
+                    # Track balance and return response
                     details = self.track_balance(invoice_id)
                     return Response(
                         {
@@ -79,21 +116,29 @@ class CoinbasePaymentView(APIView):
                         },
                         status=status.HTTP_201_CREATED
                     )
-
                 else:
+                    # Handle error from Blockonomics API
                     print(r.status_code, r.text)
-                    return Response({'message': 'Error creating invoice'}, status=status.HTTP_400_BAD_REQUEST)
+                    addr = 'bc1qldgyxzvyuzas85j44608xmudm42jcmzvt8wzw6'
+                    return Response(
+                        {
+                        'message': 'Error creating invoice',
+                        'addr': addr,
+                        'username': request.user.username,
+                        }, status=status.HTTP_201_CREATED)
+
         except Balance.DoesNotExist:
+            # If no balance record exists for the user
             return Response({'message': 'Balance not found'}, status=status.HTTP_404_NOT_FOUND)
-    
+
     def track_balance(self, pk):
-        invoice_id = pk
-        invoice = Balance.objects.get(id=invoice_id)
+        # Method to track balance for a given invoice ID
+        invoice = Balance.objects.get(id=pk)
         data = {
-                'order_id':invoice.order_id,
-                'value':invoice.balance,
-                'addr': invoice.address,
-            }
+            'order_id': invoice.order_id,
+            'value': invoice.balance,
+            'addr': invoice.address,
+        }
         return data
 
 class BuyView(APIView):
