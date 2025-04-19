@@ -43,7 +43,7 @@ class CoinbasePaymentView(APIView):
                 }
                 return Response(response,status=status.HTTP_201_CREATED)
             else:
-                api_key = 'pj0LgQwm9o3gy8M2THSalKErb1poZlTKhQA1XYfpB4k'
+                api_key = 'zo7YGopu7QRIcjNaCATRvwytagXQXQJ6m6oHrD5JvgY'
                 amount = float(1.00)
                 url = 'https://www.blockonomics.co/api/new_address'
                 headers = {'Authorization': "Bearer " + api_key}
