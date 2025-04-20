@@ -53,7 +53,7 @@ class CoinbasePaymentView(APIView):
                 # If address does not exist, generate a new address
                 api_key = 'zo7YGopu7QRIcjNaCATRvwytagXQXQJ6m6oHrD5JvgY'
                 amount = float(1.00)
-                url = 'https://www.blockonomics.co/api/new_address?match_account=2j2AsZg9oMpAq5oSpUn'
+                url = 'https://www.blockonomics.co/api/new_address?match_account=9nLfqr1W88dtcGH8qkPpE'
                 headers = {'Authorization': "Bearer " + api_key}
 
                 # Call Blockonomics API to generate a new address
