@@ -1,30 +1,20 @@
 from django.contrib import admin
 from .models import *
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('status','product', 'order_id', 'address', 'btcvalue', 'received', 'sold', 'created_by',)
-    list_filter = ('sold',"received")
-    search_fields = ('created_by__username','order_id')
+    list_display = ('created_by','product', 'sold',)
+    list_filter = ('sold',)
+    search_fields = ('created_by__username',)
     
     list_editable = ('sold','product')
 
-    fieldsets = (
-        (None, {
-            'fields': ('status', 'order_id', 'address', 'btcvalue', 'received', 'product', 'created_by',)
-        }),
-    )
 admin.site.register(Invoice, InvoiceAdmin)
 class BalanceAdmin(admin.ModelAdmin):
-    list_display = ( 'order_id', 'address', 'balance', 'received', 'created_by',)
+    list_display = ( 'created_by', 'address', 'balance')
     
     search_fields = ('created_by__username',)
     
     list_editable = ('balance',)
 
-    fieldsets = (
-        (None, {
-            'fields': ( 'order_id', 'address', 'received', 'balance', 'created_by',)
-        }),
-    )
 admin.site.register(Balance, BalanceAdmin)
 
 class Telegram_ClientAdmin(admin.ModelAdmin):
