@@ -10,7 +10,7 @@ def handle_password_reset_token(sender, instance, reset_password_token, *args, *
 
     # Construct the reset link/reset
     reset_link = f"http://mc7afo6vxv6bw4qcxggzyb73t4jg4qbfipm73njdcvyfrlzhubktchqd.onion/#/password/reset/?token={token}"
-    reset_link_nweb = f"https://matrix-kappa-drab.vercel.app/#/password/reset/?token={token}"
+    reset_link_nweb = f"https://www.blackclubs.shop/#/password/reset/?token={token}"
     user = reset_password_token.user
     # Send the reset link to the user's email
     subject = "Password Reset Link"
