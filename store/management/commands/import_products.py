@@ -23,6 +23,12 @@ class Command(BaseCommand):
                 reader = csv.DictReader(file)
                 # Get unique category names from the CSV
                 category_names = set(row["Category"] for row in reader)
+                #Find the corresponding location for each category
+                category_locations = {}
+                for row in reader:
+                    category_name = row["Category"]
+                    location = row["Location"]
+                    category_locations[category_name] = location
             
             # Skip header row
             
@@ -52,7 +58,8 @@ class Command(BaseCommand):
                     
                     categories_to_create.append(Category(
                         name=name,
-                        slug=unique_slug
+                        slug=unique_slug,
+                        location=category_locations.get(name, "")
                     ))
             
             if categories_to_create:
