@@ -171,6 +171,6 @@ CHANNEL_LAYERS = {
     },
 }
 CORS_ALLOW_ALL_ORIGINS = True
-DEFAULT_FROM_EMAIL = "support@goldencash.live"
+DEFAULT_FROM_EMAIL = "support@darkpass.shop"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
