@@ -10,12 +10,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # --- Parameters for Balance Generation ---
         # Use Decimal for balance range
-        MIN_BALANCE = decimal.Decimal('10000.00')
-        MAX_BALANCE = decimal.Decimal('110000.00') # Exclusive upper bound
+        MIN_BALANCE = decimal.Decimal('9000.00')
+        MAX_BALANCE = decimal.Decimal('40000.00') # Exclusive upper bound
 
         # --- Parameters for Price Calculation ---
-        BASE_PRICE = decimal.Decimal('300.00')
-        PRICE_BALANCE_FACTOR = decimal.Decimal('100.00')
+        BASE_PRICE = decimal.Decimal('150.00')
+        PRICE_BALANCE_FACTOR = decimal.Decimal('1000.00')
 
         # --- Decimal Context ---
         ctx = decimal.Context(rounding=decimal.ROUND_HALF_UP)
